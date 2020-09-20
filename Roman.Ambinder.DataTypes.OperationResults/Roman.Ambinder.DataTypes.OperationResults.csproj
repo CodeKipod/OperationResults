@@ -8,12 +8,14 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Copyright>Roman Ambinder</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <FileVersion>1.1.0.0</FileVersion>
-    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.0.1</AssemblyVersion>
+    <FileVersion>1.1.0.1</FileVersion>
+    <Version>1.1.1</Version>
     <PackageProjectUrl>https://github.com/CodeKipod/OperationResults</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CodeKipod/OperationResults</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
+    <Authors>Roman Ambinder</Authors>
+    <Company>Roman Ambinder</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

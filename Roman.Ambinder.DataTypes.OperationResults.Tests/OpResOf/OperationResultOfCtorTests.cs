@@ -1,6 +1,7 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OperationResultOf
+namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
 {
     [TestClass]
     public class OperationResultOfCtorTests
@@ -57,7 +58,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OperationResultOf
 
             //Act
             var opRes = new OperationResultOf<int>(
-                new System.Exception(expectedErrorMessage));
+                new Exception(expectedErrorMessage));
 
             //Assert
             AssertValuesMatchExpected(opRes,
@@ -76,7 +77,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OperationResultOf
 
             //Act
             var opRes = new OperationResultOf<string>(
-                new System.Exception(expectedErrorMessage));
+                new Exception(expectedErrorMessage));
 
             //Assert
             AssertValuesMatchExpected(opRes,
@@ -84,6 +85,65 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OperationResultOf
                 expectedErrorMessage,
                 expectedValue);
         }
+
+        [TestMethod]
+        public void CtorWithExceptionNoErrorMessage_FailedOpResWithMatchingErrorMessage()
+        {
+            //Arrange 
+            var exception = new Exception();
+
+            //Act 
+            var opRes = new OperationResultOf<int>(exception);
+
+            //Assert
+            Assert.IsFalse(opRes.Success);
+            Assert.AreEqual(exception.Message, opRes.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void CtorWithExceptionInnerExceptionNoErrorMessage_FailedOpResWithMatchingErrorMessage()
+        {
+            //Arrange 
+            var exception = new Exception(null, innerException: new Exception());
+
+            //Act 
+            var opRes = new OperationResultOf<int>(exception);
+
+            //Assert
+            Assert.IsFalse(opRes.Success);
+            // ReSharper disable once PossibleNullReferenceException
+            Assert.AreEqual(exception.InnerException.Message, opRes.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void CtorWithExceptionInnerExceptionWithErrorMessage_FailedOpResWithMatchingErrorMessage()
+        {
+            //Arrange 
+            var exception = new Exception("Error message 1", innerException: new Exception("Error message 2"));
+
+            //Act 
+            var opRes = new OperationResultOf<int>(exception);
+
+            //Assert
+            Assert.IsFalse(opRes.Success);
+            // ReSharper disable once PossibleNullReferenceException
+            Assert.AreEqual(exception.InnerException.Message, opRes.ErrorMessage);
+        }
+
+        [TestMethod]
+        public void CtorWithExceptionWithErrorMessage_FailedOpResWithMatchingErrorMessage()
+        {
+            //Arrange 
+            var exception = new Exception("Some error message");
+
+            //Act 
+            var opRes = new OperationResultOf<int>(exception);
+
+            //Assert
+            Assert.IsFalse(opRes.Success);
+            Assert.AreEqual(exception.Message, opRes.ErrorMessage);
+        }
+
 
         private static void AssertValuesMatchExpected<TValue>(
             OperationResultOf<TValue> opRes,

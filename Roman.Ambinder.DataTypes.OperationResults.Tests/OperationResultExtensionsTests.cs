@@ -1,4 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Roman.Ambinder.DataTypes.OperationResults.Tests.TestEntities;
 
 namespace Roman.Ambinder.DataTypes.OperationResults.Tests
 {
@@ -51,21 +54,46 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests
             Assert.AreEqual(value, opRes.Value);
         }
 
-        public interface ITestInterface
+        [TestMethod]
+        public void MultiSuccessfulOperationResults_AggregateToSingleOpRes_SuccessfulOpRes()
         {
-            int Id { get; }
+            //Arrange 
+            var operationResults = new[]
+                {new OperationResult(true), new OperationResult(true), new OperationResult(true)};
+
+            //Act 
+            var opRes = operationResults.AggregateToSingleOpRes();
+
+            //Arrange
+            Assert.IsTrue(opRes.Success);
+            Assert.IsNull(opRes.ErrorMessage);
         }
 
-        public class TestInterfaceImpl : ITestInterface
+        [TestMethod]
+        public void MultiSuccessfulAndFailedOperationResults_AggregateToSingleOpRes_FailedOpResWithCombinedErrorMessage()
         {
-            public TestInterfaceImpl(int id)
+            //Arrange 
+            var operationResults = new[]
             {
-                Id = id;
-            }
+                new OperationResult(true),
+                new OperationResult(false,"Some error message 1"),
+                new OperationResult(true),
+                new OperationResult(false,"Some error message 2"),
+            };
+            var sb = new StringBuilder();
+            foreach (var opRes in operationResults.Where(opRes => opRes.ErrorMessage != null))
+                sb.AppendLine(opRes.ErrorMessage);
+            var expectedErrorMessages = sb.ToString();
 
-            public int Id { get; }
+            //Act 
+            var aggregatedOpRes = operationResults.AggregateToSingleOpRes();
+
+            //Arrange
+            Assert.IsFalse(aggregatedOpRes.Success);
+            Assert.IsNotNull(aggregatedOpRes.ErrorMessage);
+            Assert.AreEqual(expectedErrorMessages, aggregatedOpRes.ErrorMessage);
         }
+
+    
     }
-
-
 }

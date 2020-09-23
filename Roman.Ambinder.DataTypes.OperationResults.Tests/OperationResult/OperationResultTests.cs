@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Roman.Ambinder.DataTypes.OperationResults.Tests
+namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OperationResult
 {
     [TestClass]
     public class OperationResultTests
@@ -15,7 +15,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests
             var exception = new Exception();
 
             //Act 
-            var opRes = new OperationResult(exception);
+            var opRes = new OperationResults.OperationResult(exception);
 
             //Assert
             Assert.IsFalse(opRes.Success);
@@ -29,7 +29,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests
             var exception = new Exception(null, innerException: new Exception());
 
             //Act 
-            var opRes = new OperationResult(exception);
+            var opRes = new OperationResults.OperationResult(exception);
 
             //Assert
             Assert.IsFalse(opRes.Success);
@@ -44,7 +44,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests
             var exception = new Exception("Error message 1", innerException: new Exception("Error message 2"));
 
             //Act 
-            var opRes = new OperationResult(exception);
+            var opRes = new OperationResults.OperationResult(exception);
 
             //Assert
             Assert.IsFalse(opRes.Success);
@@ -56,7 +56,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests
         public void SuccessfulOpRes_ImplicitCastToBool_True()
         {
             //Arrange 
-            var opRes = new OperationResult(success: true);
+            var opRes = new OperationResults.OperationResult(success: true);
 
             //Act 
             bool success = opRes;
@@ -69,7 +69,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests
         public void FailedOpRes_ImplicitCastToBool_False()
         {
             //Arrange 
-            var opRes = new OperationResult(success: false);
+            var opRes = new OperationResults.OperationResult(success: false);
 
             //Act 
             bool success = opRes;
@@ -83,7 +83,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests
         {
             //Arrange 
             var operationResults = new[]
-                {new OperationResult(true), new OperationResult(true), new OperationResult(true)};
+                {new OperationResults.OperationResult(true), new OperationResults.OperationResult(true), new OperationResults.OperationResult(true)};
 
             //Act 
             var opRes = operationResults.AggregateToSingleOpRes();
@@ -99,10 +99,10 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests
             //Arrange 
             var operationResults = new[]
                 { 
-                    new OperationResult(true),
-                    new OperationResult(false,"Some error message 1"),
-                    new OperationResult(true),
-                    new OperationResult(false,"Some error message 2"),
+                    new OperationResults.OperationResult(true),
+                    new OperationResults.OperationResult(false,"Some error message 1"),
+                    new OperationResults.OperationResult(true),
+                    new OperationResults.OperationResult(false,"Some error message 2"),
                 };
             var sb = new StringBuilder();
             foreach (var opRes in operationResults.Where(opRes => opRes.ErrorMessage != null))

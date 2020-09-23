@@ -1,7 +1,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Roman.Ambinder.DataTypes.OperationResults.Tests
+namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OperationResultOf
 {
     [TestClass]
     public class OperationResultOfTests
@@ -84,7 +84,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests
             var opResWithValue = new OperationResultOf<int>(success: true, value: 10);
 
             //Act 
-            OperationResult opRes = opResWithValue;
+            OperationResults.OperationResult opRes = opResWithValue;
 
             //Assert
             Assert.AreEqual(opResWithValue.Success, opRes.Success);
@@ -112,7 +112,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests
                 errorMessage: "Some error  message ");
 
             //Act 
-            OperationResult opRes = opResWithValue;
+            OperationResults.OperationResult opRes = opResWithValue;
 
             //Assert
             Assert.AreEqual(opResWithValue.Success, opRes.Success);

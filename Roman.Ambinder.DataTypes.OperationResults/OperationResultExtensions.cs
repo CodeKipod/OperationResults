@@ -15,6 +15,11 @@ namespace Roman.Ambinder.DataTypes.OperationResults
          where TImpl : TBase
             => new OperationResultOf<TBase>(success: true, value: value);
 
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static OperationResultOf<T> AsFailedOpResOf<T>(this string errorMessage)
+            => new OperationResultOf<T>(success: false, value: default, errorMessage: errorMessage);
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationResult AggregateToSingleOpRes(
             this IEnumerable<OperationResult> operationResults)

@@ -8,14 +8,19 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Copyright>Roman Ambinder</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>1.1.0.2</AssemblyVersion>
-    <FileVersion>1.1.0.2</FileVersion>
-    <Version>1.1.2</Version>
+    <AssemblyVersion>1.1.0.3</AssemblyVersion>
+    <FileVersion>1.1.0.3</FileVersion>
+    <Version>1.1.3</Version>
     <PackageProjectUrl>https://github.com/CodeKipod/OperationResults</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CodeKipod/OperationResults</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <Authors>Roman Ambinder</Authors>
     <Company>Roman Ambinder</Company>
+    <PackageReleaseNotes>1.) Added operation result creation extensions for error message and exception
+2.) Added Formatting extensions
+3.) Added Exception extensions
+</PackageReleaseNotes>
+    <PackageTags>OperationResult,CleanAPI</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -12,9 +12,11 @@ namespace Roman.Ambinder.DataTypes.OperationResults
 
         public static ref readonly OperationResult Successful => ref _successful;
 
+        //[Obsolete("Deprecated due to readability concerns. Use extension method OperationResultExtensions.AsFailedOpRes")]
         public OperationResult(Exception ex)
-            : this(errorMessage: (ex.InnerException ?? ex).Message) { }
+            : this(errorMessage: ex.ResolveErrorMessage()) { }
 
+       // [Obsolete("Deprecated due to readability concerns. Use extension method OperationResultExtensions.AsFailedOpRes")]
         public OperationResult(string errorMessage)
             : this(success: false, errorMessage) { }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -15,10 +16,23 @@ namespace Roman.Ambinder.DataTypes.OperationResults
          where TImpl : TBase
             => new OperationResultOf<TBase>(success: true, value: value);
 
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationResultOf<T> AsFailedOpResOf<T>(this string errorMessage)
             => new OperationResultOf<T>(success: false, value: default, errorMessage: errorMessage);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static OperationResultOf<T> AsFailedOpResOf<T>(this Exception exception)
+            => new OperationResultOf<T>(success: false, value: default, 
+                errorMessage: exception.ResolveErrorMessage());
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static OperationResult AsFailedOpRes(this Exception exception)
+            => new OperationResult(success: false, 
+                errorMessage: exception.ResolveErrorMessage());
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static OperationResult AsFailedOpRes(this string errorMessage)
+         => new OperationResult(success: false, errorMessage: errorMessage);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationResult AggregateToSingleOpRes(

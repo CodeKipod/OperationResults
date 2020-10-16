@@ -22,12 +22,12 @@ namespace Roman.Ambinder.DataTypes.OperationResults
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationResultOf<T> AsFailedOpResOf<T>(this Exception exception)
-            => new OperationResultOf<T>(success: false, value: default, 
+            => new OperationResultOf<T>(success: false, value: default,
                 errorMessage: exception.ResolveErrorMessage());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationResult AsFailedOpRes(this Exception exception)
-            => new OperationResult(success: false, 
+            => new OperationResult(success: false,
                 errorMessage: exception.ResolveErrorMessage());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -58,6 +58,61 @@ namespace Roman.Ambinder.DataTypes.OperationResults
             return allSuccessful
                 ? OperationResult.Successful
                 : new OperationResult(success: false, errorMessage: errorMessagesBuilder?.ToString());
+        }
+
+
+        public static void Analayze(this IEnumerable<OperationResult> operationResults,
+          out StringBuilder errorsMessageBuilder,
+          out int failedOpResCounter,
+          out int successfulOpResCounter)
+        {
+            errorsMessageBuilder = null;
+            failedOpResCounter = 0;
+            successfulOpResCounter = 0;
+            foreach (var opRes in operationResults)
+            {
+                if (!opRes)
+                {
+                    ++failedOpResCounter;
+                    if (!string.IsNullOrEmpty(opRes.ErrorMessage))
+                    {
+                        if (errorsMessageBuilder == null)
+                            errorsMessageBuilder = new StringBuilder();
+                        errorsMessageBuilder.AppendLine(opRes.ErrorMessage);
+                    }
+                }
+                else
+                {
+                    ++successfulOpResCounter;
+                }
+            }
+        }
+
+        public static void Analayze<TValue>(this IEnumerable<OperationResultOf<TValue>> operationResults,
+            out StringBuilder errorsMessageBuilder,
+            out int failedOpResCounter,
+            out int successfulOpResCounter)
+        {
+            errorsMessageBuilder = null;
+            failedOpResCounter = 0;
+            successfulOpResCounter = 0;
+            foreach (var opRes in operationResults)
+            {
+                if (!opRes)
+                {
+                    ++failedOpResCounter;
+                    if (!string.IsNullOrEmpty(opRes.ErrorMessage))
+                    {
+                        if (errorsMessageBuilder == null)
+                            errorsMessageBuilder = new StringBuilder();
+                        errorsMessageBuilder.AppendLine(opRes.ErrorMessage);
+                    }
+                }
+                else
+                {
+                    ++successfulOpResCounter;
+                }
+            }
         }
     }
 }

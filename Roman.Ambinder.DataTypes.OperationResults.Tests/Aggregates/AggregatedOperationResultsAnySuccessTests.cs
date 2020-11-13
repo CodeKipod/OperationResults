@@ -16,15 +16,13 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
             var expectedErrorMessage = GetExpectedErrorMessages(operationResults);
             const bool expectedSuccessValue = true;
 
-            //Act 
+            //Act
             var actualOpResAggreagte = evaluatorUnderTest.Evaluate(operationResults);
 
             //Assert
             Assert.AreEqual(expectedSuccessValue, actualOpResAggreagte.Success);
             Assert.AreEqual(expectedErrorMessage, actualOpResAggreagte.ErrorMessage);
         }
-
-        
 
         [TestMethod]
         public void AllFailedOpResNoErrorMessage_Evaluate_MatchingFailedOpRes()
@@ -35,7 +33,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
             var expectedErrorMessage = GetExpectedErrorMessages(operationResults);
             const bool expectedSuccessValue = false;
 
-            //Act 
+            //Act
             var actualOpResAggreagte = evaluatorUnderTest.Evaluate(operationResults);
 
             //Assert
@@ -48,19 +46,18 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
         {
             //Arrange
             var evaluatorUnderTest = GetEvaluator();
-            var operationResults = new[] { new OperationResult(false, "Error1"), 
+            var operationResults = new[] { new OperationResult(false, "Error1"),
                 new OperationResult(false, "Error2") };
             var expectedErrorMessage = GetExpectedErrorMessages(operationResults);
             const bool expectedSuccessValue = false;
 
-            //Act 
+            //Act
             var actualOpResAggreagte = evaluatorUnderTest.Evaluate(operationResults);
 
             //Assert
             Assert.AreEqual(expectedSuccessValue, actualOpResAggreagte.Success);
             Assert.AreEqual(expectedErrorMessage, actualOpResAggreagte.ErrorMessage);
         }
-
 
         [TestMethod]
         public void SomeFailedSomeSuccessfulOpRes_Evaluate_MatchingFailedOpRes()
@@ -72,7 +69,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
             var expectedErrorMessage = GetExpectedErrorMessages(operationResults);
             const bool expectedSuccessValue = true;
 
-            //Act 
+            //Act
             var actualOpResAggreagte = evaluatorUnderTest.Evaluate(operationResults);
 
             //Assert
@@ -100,7 +97,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
             return expectedErrorMessagesBuilder?.ToString();
         }
 
-        private static IAggregatedOperationResultsEvaluator GetEvaluator() 
+        private static IAggregatedOperationResultsEvaluator GetEvaluator()
             => AggregatedOperationResultsAnySuccess.Instance;
     }
 }

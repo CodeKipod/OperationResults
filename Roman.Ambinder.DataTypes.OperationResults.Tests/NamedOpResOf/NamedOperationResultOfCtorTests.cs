@@ -1,10 +1,11 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Runtime.CompilerServices;
 
-namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
+namespace Roman.Ambinder.DataTypes.OperationResults.Tests.NamedOpResOf
 {
     [TestClass]
-    public class OperationResultOfCtorTests
+    public class NamedNamedOperationResultOfCtorTests
     {
         [TestMethod]
         public void ValueTypeUseFullCtor_MatchingValuesOperationResultCreated()
@@ -15,7 +16,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
             const int expectedValue = 2;
 
             //Act
-            var opRes = new OperationResultOf<int>(
+            var opRes = new NamedOperationResultOf<int>(
                 expectedSuccessIndication,
                 expectedValue,
                 expectedErrorMessage);
@@ -36,7 +37,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
             const string expectedValue = "2";
 
             //Act
-            var opRes = new OperationResultOf<string>(
+            var opRes = new NamedOperationResultOf<string>(
                 expectedSuccessIndication,
                 expectedValue,
                 expectedErrorMessage);
@@ -57,7 +58,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
             const int expectedValue = default;
 
             //Act
-            var opRes = new OperationResultOf<int>(
+            var opRes = new NamedOperationResultOf<int>(
                 new Exception(expectedErrorMessage));
 
             //Assert
@@ -76,7 +77,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
             const string expectedValue = default;
 
             //Act
-            var opRes = new OperationResultOf<string>(
+            var opRes = new NamedOperationResultOf<string>(
                 new Exception(expectedErrorMessage));
 
             //Assert
@@ -93,11 +94,13 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
             var exception = new Exception();
 
             //Act
-            var opRes = new OperationResultOf<int>(exception);
+            var opRes = new NamedOperationResultOf<int>(exception);
 
             //Assert
-            Assert.IsFalse(opRes.Success);
-            Assert.AreEqual(exception.Message, opRes.ErrorMessage);
+            AssertValuesMatchExpected(opRes,
+                  expectedSuccessIndication: false,
+                  expectedErrorMessage: exception.Message,
+                  expectedValue: default);
         }
 
         [TestMethod]
@@ -107,52 +110,60 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
             var exception = new Exception(null, innerException: new Exception());
 
             //Act
-            var opRes = new OperationResultOf<int>(exception);
+            var opRes = new NamedOperationResultOf<int>(exception);
 
             //Assert
-            Assert.IsFalse(opRes.Success);
-            // ReSharper disable once PossibleNullReferenceException
-            Assert.AreEqual(exception.InnerException.Message, opRes.ErrorMessage);
+            AssertValuesMatchExpected(opRes,
+                expectedSuccessIndication: false,
+                expectedErrorMessage: exception.InnerException.Message,
+                expectedValue: default);
         }
 
         [TestMethod]
         public void CtorWithExceptionInnerExceptionWithErrorMessage_FailedOpResWithMatchingErrorMessage()
         {
             //Arrange
-            var exception = new Exception("Error message 1", innerException: new Exception("Error message 2"));
+            var exception = new Exception("Error message 1",
+                innerException: new Exception("Error message 2"));
 
             //Act
-            var opRes = new OperationResultOf<int>(exception);
+            var opRes = new NamedOperationResultOf<int>(exception);
 
             //Assert
-            Assert.IsFalse(opRes.Success);
-            // ReSharper disable once PossibleNullReferenceException
-            Assert.AreEqual(exception.InnerException.Message, opRes.ErrorMessage);
+            AssertValuesMatchExpected(opRes,
+              expectedSuccessIndication: false,
+              expectedErrorMessage: exception.InnerException.Message,
+              expectedValue: default);
         }
 
         [TestMethod]
         public void CtorWithExceptionWithErrorMessage_FailedOpResWithMatchingErrorMessage()
         {
             //Arrange
-            var exception = new Exception("Some error message");
+            const string errorMessage = "Some error message";
+            var exception = new Exception(errorMessage);
 
             //Act
-            var opRes = new OperationResultOf<int>(exception);
+            var opRes = new NamedOperationResultOf<int>(exception);
 
             //Assert
-            Assert.IsFalse(opRes.Success);
-            Assert.AreEqual(exception.Message, opRes.ErrorMessage);
+            AssertValuesMatchExpected(opRes,
+                false,
+                errorMessage,
+                default);
         }
 
         private static void AssertValuesMatchExpected<TValue>(
-            OperationResultOf<TValue> opRes,
+            NamedOperationResultOf<TValue> opRes,
             bool expectedSuccessIndication,
             string expectedErrorMessage,
-            TValue expectedValue)
+            TValue expectedValue,
+            [CallerMemberName] string expecteOpName = null)
         {
             Assert.AreEqual(expectedValue, opRes.Value, $"Expected {nameof(opRes.Value)} '{opRes.Value}' to match '{expectedValue}'");
             Assert.AreEqual(expectedSuccessIndication, opRes.Success, $"Expected {nameof(opRes.Success)} '{opRes.Success}' to match '{expectedSuccessIndication}'");
             Assert.AreEqual(expectedErrorMessage, opRes.ErrorMessage, $"Expected {nameof(opRes.ErrorMessage)} '{opRes.ErrorMessage}' to match '{expectedErrorMessage}'");
+            Assert.AreEqual(expecteOpName, opRes.OperationName);
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
 using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
 {
@@ -14,14 +14,13 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             //Arrange
             const string errorMessage = "Some error message";
 
-            //Act 
+            //Act
             var opRes = errorMessage.AsFailedOpRes();
 
             //Assert
             Assert.IsFalse(opRes.Success);
             Assert.AreEqual(errorMessage, opRes.ErrorMessage);
         }
-
 
         [TestMethod]
         public void Exception_AsFailedOpResult_MatchingFailedOperationResult()
@@ -30,7 +29,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             const string errorMessage = "Some error message";
             var exception = new Exception(errorMessage);
 
-            //Act 
+            //Act
             var opRes = exception.AsFailedOpRes();
 
             //Assert
@@ -45,7 +44,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             const string errorMessage = "Some error message 2";
             var exception = new Exception("external exception message", new Exception(errorMessage));
 
-            //Act 
+            //Act
             var opRes = exception.AsFailedOpRes();
 
             //Assert
@@ -56,11 +55,11 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
         [TestMethod]
         public void MultiSuccessfulOperationResults_AggregateToSingleOpRes_SuccessfulOpRes()
         {
-            //Arrange 
+            //Arrange
             var operationResults = new[]
                 {new OperationResult(true), new OperationResult(true), new OperationResult(true)};
 
-            //Act 
+            //Act
             var opRes = operationResults.AggregateToSingleOpRes();
 
             //Arrange
@@ -71,7 +70,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
         [TestMethod]
         public void MultiSuccessfulAndFailedOperationResults_AggregateToSingleOpRes_FailedOpResWithCombinedErrorMessage()
         {
-            //Arrange 
+            //Arrange
             var operationResults = new[]
             {
                 new OperationResult(success: true),
@@ -84,7 +83,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
                 sb.AppendLine(value: opRes.ErrorMessage);
             var expectedErrorMessages = sb.ToString();
 
-            //Act 
+            //Act
             var aggregatedOpRes = operationResults.AggregateToSingleOpRes();
 
             //Arrange

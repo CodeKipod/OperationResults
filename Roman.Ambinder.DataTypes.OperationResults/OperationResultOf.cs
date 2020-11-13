@@ -5,7 +5,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "U2U1004:Public value types should implement equality", Justification = "<Pending>")]
     public readonly struct OperationResultOf<T>
     {
-       // [Obsolete("Deprecated due to readability concerns.Use extension method OperationResultExtensions.AsFailedOpResOf")]
+        // [Obsolete("Deprecated due to readability concerns.Use extension method OperationResultExtensions.AsFailedOpResOf")]
         public OperationResultOf(Exception ex)
             : this(errorMessage: ex.ResolveErrorMessage()) { }
 

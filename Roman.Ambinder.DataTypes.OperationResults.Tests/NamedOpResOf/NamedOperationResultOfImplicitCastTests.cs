@@ -1,9 +1,9 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
+namespace Roman.Ambinder.DataTypes.OperationResults.Tests.NamedOpResOf
 {
     [TestClass]
-    public class OperationResultOfImplicitCastTests
+    public class NamedNamedOperationResultOfImplicitCastTests
     {
         [TestMethod]
         public void SuccessfulValueTypeOpRes_ImplicitCast_MatchingExpected()
@@ -12,7 +12,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
             const bool expectedSuccessIndication = true;
             const string expectedErrorMessage = null;
             const int expectedValue = 2;
-            var opRes = new OperationResultOf<int>(
+            var opRes = new NamedOperationResultOf<int>(
                 expectedSuccessIndication,
                 expectedValue,
                 errorMessage: expectedErrorMessage);
@@ -38,7 +38,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
             const bool expectedSuccessIndication = false;
             const string expectedErrorMessage = "Some error message";
             const int expectedValue = default;
-            var opRes = new OperationResultOf<int>(
+            var opRes = new NamedOperationResultOf<int>(
                 expectedSuccessIndication,
                 expectedValue,
                 expectedErrorMessage);
@@ -64,7 +64,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
             const bool expectedSuccessIndication = true;
             const string expectedErrorMessage = null;
             const string expectedValue = "2";
-            var opRes = new OperationResultOf<string>(
+            var opRes = new NamedOperationResultOf<string>(
                 expectedSuccessIndication,
                 expectedValue,
                 errorMessage: expectedErrorMessage);
@@ -90,7 +90,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
             const bool expectedSuccessIndication = false;
             const string expectedErrorMessage = "Some error message";
             const string expectedValue = default;
-            var opRes = new OperationResultOf<string>(
+            var opRes = new NamedOperationResultOf<string>(
                 expectedSuccessIndication,
                 expectedValue,
                 expectedErrorMessage);
@@ -110,7 +110,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
         }
 
         private static void AssertAreEqual<T>(
-            OperationResultOf<T> opRes,
+            NamedOperationResultOf<T> opRes,
             bool expectedSuccessIndication,
             T expectedValue,
             bool actualSuccessIndication,
@@ -127,7 +127,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
         public void SuccessfulOpRes_ImplicitCastToBool_True()
         {
             //Arrange
-            var opRes = new OperationResultOf<int>(success: true, value: 10);
+            var opRes = new NamedOperationResultOf<int>(success: true, value: 10);
 
             //Act
             bool success = opRes;
@@ -140,7 +140,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
         public void SuccessfulOpRes_ImplicitOperationResult_PropertiesMatch()
         {
             //Arrange
-            var opResWithValue = new OperationResultOf<int>(success: true, value: 10);
+            var opResWithValue = new NamedOperationResultOf<int>(success: true, value: 10);
 
             //Act
             OperationResult opRes = opResWithValue;
@@ -154,7 +154,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
         public void FailedOpRes_ImplicitCastToBool_False()
         {
             //Arrange
-            var opRes = new OperationResultOf<int>(success: false);
+            var opRes = new NamedOperationResultOf<int>(success: false, value: default);
 
             //Act
             bool success = opRes;
@@ -167,7 +167,8 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpResOf
         public void FailedOpRes_ImplicitOperationResult_PropertiesMatch()
         {
             //Arrange
-            var opResWithValue = new OperationResultOf<int>(success: false,
+            var opResWithValue = new NamedOperationResultOf<int>(success: false,
+                value: default,
                 errorMessage: "Some error  message ");
 
             //Act

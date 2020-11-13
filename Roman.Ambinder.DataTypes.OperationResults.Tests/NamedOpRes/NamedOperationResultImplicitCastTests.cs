@@ -1,15 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpRes
+namespace Roman.Ambinder.DataTypes.OperationResults.Tests.NamedOpRes
 {
     [TestClass]
-    public class OperationResultImplicitCastTests
+    public class NamedOperationResultImplicitCastTests
     {
         [TestMethod]
         public void SuccessfulOpRes_ImplicitCastToBool_True()
         {
             //Arrange
-            var opRes = new OperationResult(success: true);
+            var opRes = new NamedOperationResult(success: true);
 
             //Act
             bool success = opRes;
@@ -22,7 +22,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpRes
         public void FailedOpRes_ImplicitCastToBool_False()
         {
             //Arrange
-            var opRes = new OperationResult(success: false);
+            var opRes = new NamedOperationResult(success: false);
 
             //Act
             bool success = opRes;

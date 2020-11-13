@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
 {
@@ -13,7 +13,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             const string expectedErrorMessage = "Some error message";
             var exception = new Exception(expectedErrorMessage);
 
-            //Act 
+            //Act
             var errorMessage = exception.ResolveErrorMessage();
 
             //Assert
@@ -26,7 +26,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             //Arrange
             var exception = new Exception(null);
 
-            //Act 
+            //Act
             var errorMessage = exception.ResolveErrorMessage();
 
             //Assert
@@ -40,22 +40,21 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             const string expectedErrorMessage = "Some exception message";
             var exception = new Exception("Outer exception", new Exception(expectedErrorMessage));
 
-            //Act 
+            //Act
             var errorMessage = exception.ResolveErrorMessage();
 
             //Assert
             Assert.AreEqual(expectedErrorMessage, errorMessage);
         }
 
-
         [TestMethod]
         public void ExceptionWithMultipleInnerExceptions_ResolveErrorMessage_MatchingErrorMessage()
         {
             //Arrange
             const string expectedErrorMessage = "Some exception message";
-            var exception = new Exception("1", new Exception("2",new Exception(expectedErrorMessage)));
+            var exception = new Exception("1", new Exception("2", new Exception(expectedErrorMessage)));
 
-            //Act 
+            //Act
             var errorMessage = exception.ResolveErrorMessage();
 
             //Assert

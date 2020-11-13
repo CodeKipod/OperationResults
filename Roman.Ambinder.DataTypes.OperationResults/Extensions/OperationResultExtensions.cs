@@ -60,7 +60,6 @@ namespace Roman.Ambinder.DataTypes.OperationResults
                 : new OperationResult(success: false, errorMessage: errorMessagesBuilder?.ToString());
         }
 
-
         public static void Analayze(this IEnumerable<OperationResult> operationResults,
           out StringBuilder errorsMessageBuilder,
           out int failedOpResCounter,

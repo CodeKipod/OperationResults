@@ -16,7 +16,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults
         public OperationResult(Exception ex)
             : this(errorMessage: ex.ResolveErrorMessage()) { }
 
-       // [Obsolete("Deprecated due to readability concerns. Use extension method OperationResultExtensions.AsFailedOpRes")]
+        // [Obsolete("Deprecated due to readability concerns. Use extension method OperationResultExtensions.AsFailedOpRes")]
         public OperationResult(string errorMessage)
             : this(success: false, errorMessage) { }
 

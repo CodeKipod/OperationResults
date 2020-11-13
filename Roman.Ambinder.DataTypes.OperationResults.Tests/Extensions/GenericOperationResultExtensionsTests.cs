@@ -1,6 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Roman.Ambinder.DataTypes.OperationResults.Tests.TestEntities;
+using System;
 
 namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
 {
@@ -13,7 +13,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             //Arrange
             const int value = 4;
 
-            //Act 
+            //Act
             var opRes = value.AsSuccessfulOpRes();
 
             //Assert
@@ -28,7 +28,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             //Arrange
             const string value = "4";
 
-            //Act 
+            //Act
             var opRes = value.AsSuccessfulOpRes();
 
             //Assert
@@ -44,7 +44,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             const string errorMessage = "Some error message 2";
             var exception = new Exception(errorMessage);
 
-            //Act 
+            //Act
             var opRes = exception.AsFailedOpResOf<int>();
 
             //Assert
@@ -60,7 +60,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             const string errorMessage = "Some error message 2";
             var exception = new Exception("external exception message", new Exception(errorMessage));
 
-            //Act 
+            //Act
             var opRes = exception.AsFailedOpResOf<int>();
 
             //Assert
@@ -76,7 +76,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             const string errorMessage = "Some error message 2";
             var exception = new Exception(errorMessage);
 
-            //Act 
+            //Act
             var opRes = exception.AsFailedOpResOf<string>();
 
             //Assert
@@ -92,7 +92,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             const string errorMessage = "Some error message";
             var exception = new Exception(errorMessage);
 
-            //Act 
+            //Act
             var opRes = exception.AsFailedOpResOf<string>();
 
             //Assert
@@ -101,14 +101,13 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             Assert.AreEqual(default(string), opRes.Value);
         }
 
-
         [TestMethod]
         public void ErrorMessage_AsFailedOpResultOfRefType_MatchingFailedOperationResult()
         {
             //Arrange
             const string errorMessage = "Some error message";
 
-            //Act 
+            //Act
             var opRes = errorMessage.AsFailedOpResOf<string>();
 
             //Assert
@@ -123,7 +122,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             //Arrange
             const string errorMessage = "Some error message";
 
-            //Act 
+            //Act
             var opRes = errorMessage.AsFailedOpResOf<int>();
 
             //Assert
@@ -138,7 +137,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             //Arrange
             var value = new TestInterfaceImpl(4);
 
-            //Act 
+            //Act
             OperationResultOf<ITestInterface> opRes =
                 value.AsSuccessfulOpRes<ITestInterface>();
 
@@ -147,8 +146,5 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
             Assert.IsNull(opRes.ErrorMessage);
             Assert.AreEqual(value, opRes.Value);
         }
-
-   
-
     }
 }

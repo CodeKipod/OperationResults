@@ -4,9 +4,11 @@
         BaseAggregatedOperationResultsEvaluator,
         IAggregatedOperationResultsEvaluator
     {
-        private AggregatedOperationResultsAllSuccess() { }
+        private AggregatedOperationResultsAllSuccess()
+        {
+        }
 
-        public OperationResult Evaluate(OperationResult[] operationResults) 
+        public OperationResult Evaluate(OperationResult[] operationResults)
             => Evaluate(operationResults, AggregationPolicyEnum.All);
 
         public OperationResult Evaluate<TValue>(OperationResultOf<TValue>[] operationResults)

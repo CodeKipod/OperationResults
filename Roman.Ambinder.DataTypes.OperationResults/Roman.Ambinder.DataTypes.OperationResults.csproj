@@ -8,15 +8,15 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Copyright>Roman Ambinder</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <AssemblyVersion>1.1.0.5</AssemblyVersion>
-    <FileVersion>1.1.0.5</FileVersion>
-    <Version>1.1.5</Version>
+    <AssemblyVersion>1.1.0.6</AssemblyVersion>
+    <FileVersion>1.1.0.6</FileVersion>
+    <Version>1.1.6</Version>
     <PackageProjectUrl>https://github.com/CodeKipod/OperationResults</PackageProjectUrl>
     <RepositoryUrl>https://github.com/CodeKipod/OperationResults</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <Authors>Roman Ambinder</Authors>
     <Company>Roman Ambinder</Company>
-    <PackageReleaseNotes>Adding NamedOpreationResult and NamedOperationResultOf
+    <PackageReleaseNotes>Adding ReadonlyCollectionOpRes
 </PackageReleaseNotes>
     <PackageTags>OperationResult,CleanAPI</PackageTags>
   </PropertyGroup>

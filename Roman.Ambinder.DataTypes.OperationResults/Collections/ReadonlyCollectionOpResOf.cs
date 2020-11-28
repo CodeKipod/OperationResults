@@ -1,33 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace Roman.Ambinder.DataTypes.OperationResults.Collections
+namespace Roman.Ambinder.DataTypes.OperationResults
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "U2U1004:Public value types should implement equality", Justification = "<Pending>")]
-    public readonly struct OperationResultOf<T>
+    public class ReadonlyCollectionOpResOf<TItem>
     {
         // [Obsolete("Deprecated due to readability concerns.Use extension method OperationResultExtensions.AsFailedOpResOf")]
-        public OperationResultOf(Exception ex)
+        public ReadonlyCollectionOpResOf(Exception ex)
             : this(errorMessage: ex.ResolveErrorMessage()) { }
 
         //[Obsolete("Deprecated due to readability concerns.Use extension method OperationResultExtensions.AsFailedOpResOf")]
-        public OperationResultOf(string errorMessage)
+        public ReadonlyCollectionOpResOf(string errorMessage)
             : this(success: false, errorMessage: errorMessage) { }
 
-        public OperationResultOf(bool success, in T value = default, string errorMessage = null)
+        public ReadonlyCollectionOpResOf(bool success, in IReadOnlyCollection<TItem> values = default, string errorMessage = null)
         {
             Success = success;
-            Value = value;
+            Values = values;
             ErrorMessage = errorMessage;
         }
 
-        public static implicit operator bool(in OperationResultOf<T> opRes)
+        public static implicit operator bool(in ReadonlyCollectionOpResOf<TItem> opRes)
             => opRes.Success;
 
-        public static implicit operator OperationResult(in OperationResultOf<T> opRes)
+        public static implicit operator OperationResult(in ReadonlyCollectionOpResOf<TItem> opRes)
             => new OperationResult(opRes.Success, opRes.ErrorMessage);
 
         public override string ToString()
-            => $"{nameof(Success)}: {Success}, {nameof(Value)}: {Value}, {nameof(ErrorMessage)}: {ErrorMessage}";
+            => $"{nameof(Success)}: {Success}, {nameof(Values)}: {Values}, {nameof(ErrorMessage)}: {ErrorMessage}";
 
         /// <summary>
         ///
@@ -37,7 +37,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Collections
         /// <summary>
         ///
         /// </summary>
-        public T Value { get; }
+        public IReadOnlyCollection<TItem> Values { get; }
 
         /// <summary>
         ///

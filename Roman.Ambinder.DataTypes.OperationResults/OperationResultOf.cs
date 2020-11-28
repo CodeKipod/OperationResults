@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Roman.Ambinder.DataTypes.OperationResults.Collections
+namespace Roman.Ambinder.DataTypes.OperationResults
 {
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "U2U1004:Public value types should implement equality", Justification = "<Pending>")]
     public readonly struct OperationResultOf<T>

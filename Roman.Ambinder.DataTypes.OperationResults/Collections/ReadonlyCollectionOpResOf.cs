@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Roman.Ambinder.DataTypes.OperationResults
+namespace Roman.Ambinder.DataTypes.OperationResults.Collections
 {
     public class ReadonlyCollectionOpResOf<TItem>
     {

@@ -11,7 +11,7 @@
 
             var success = failedOpResCounter == 0 ||
                 ResolveSuccessByPolicy(operationResults, successfulOpResCounter, aggregationPolicy);
-            
+
             return new OperationResult(success, errorMessage: errorsMessageBuilder?.ToString());
         }
 

@@ -1,12 +1,12 @@
-﻿using Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation;
-
-namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation
+﻿namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation
 {
     public class AggregatedOperationResultsAnySuccess :
        BaseAggregatedOperationResultsEvaluator,
        IAggregatedOperationResultsEvaluator
     {
-        private AggregatedOperationResultsAnySuccess() { }
+        private AggregatedOperationResultsAnySuccess()
+        {
+        }
 
         public OperationResult Evaluate(OperationResult[] operationResults)
           => Evaluate(operationResults, AggregationPolicyEnum.Any);

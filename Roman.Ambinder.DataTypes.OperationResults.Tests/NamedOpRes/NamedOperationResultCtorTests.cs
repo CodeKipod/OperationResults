@@ -1,20 +1,24 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Runtime.CompilerServices;
 
-namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpRes
+namespace Roman.Ambinder.DataTypes.OperationResults.Tests.NamedOpRes
 {
     [TestClass]
-    public class OperationResultCtorTests  
+    public class NamedOperationResultCtorTests  
     {
         [TestMethod]
         public void SuccessfulOperationPropertyResult_ValuesMatch()
         {
             //Act
-            var opRes = OperationResult.Successful;
+            var opRes = new NamedOperationResult(true);
 
             //Assert
             Assert.IsTrue(opRes.Success);
             Assert.IsNull(opRes.ErrorMessage);
+            Assert.AreEqual(
+                nameof(SuccessfulOperationPropertyResult_ValuesMatch),
+                opRes.OperationName);
         }
 
         [TestMethod]
@@ -25,13 +29,14 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpRes
             const string expectedErrorMessage = "Some error message";
 
             //Act
-            var opRes = new OperationResult(
+            var opRes = new NamedOperationResult(
                 success: expectedSuccessIndication,
                 errorMessage: expectedErrorMessage);
 
             //Assert
             Assert.AreEqual(expectedSuccessIndication, opRes.Success, $"Expected {nameof(opRes.Success)} '{opRes.Success}' to match '{expectedSuccessIndication}'");
             Assert.AreEqual(expectedErrorMessage, opRes.ErrorMessage, $"Expected {nameof(opRes.ErrorMessage)} '{opRes.ErrorMessage}' to match '{expectedErrorMessage}'");
+            AssertOperationNameMatchCaller(opRes);
         }
 
         [TestMethod]
@@ -42,11 +47,12 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpRes
             const string expectedErrorMessage = "Some error message";
 
             //Act
-            var opRes = new OperationResult(new Exception(expectedErrorMessage));
+            var opRes = new NamedOperationResult(new Exception(expectedErrorMessage));
 
             //Assert
             Assert.AreEqual(expectedSuccessIndication, opRes.Success, $"Expected {nameof(opRes.Success)} '{opRes.Success}' to match '{expectedSuccessIndication}'");
             Assert.AreEqual(expectedErrorMessage, opRes.ErrorMessage, $"Expected {nameof(opRes.ErrorMessage)} '{opRes.ErrorMessage}' to match '{expectedErrorMessage}'");
+            AssertOperationNameMatchCaller(opRes);
         }
 
         [TestMethod]
@@ -57,11 +63,12 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpRes
             const string expectedErrorMessage = "Some error message";
 
             //Act
-            var opRes = new OperationResult(expectedErrorMessage);
+            var opRes = new NamedOperationResult(expectedErrorMessage);
 
             //Assert
             Assert.AreEqual(expectedSuccessIndication, opRes.Success, $"Expected {nameof(opRes.Success)} '{opRes.Success}' to match '{expectedSuccessIndication}'");
             Assert.AreEqual(expectedErrorMessage, opRes.ErrorMessage, $"Expected {nameof(opRes.ErrorMessage)} '{opRes.ErrorMessage}' to match '{expectedErrorMessage}'");
+            AssertOperationNameMatchCaller(opRes);
         }
 
         [TestMethod]
@@ -71,12 +78,13 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpRes
             var exception = new Exception(null, innerException: new Exception());
 
             //Act
-            var opRes = new OperationResult(exception);
+            var opRes = new NamedOperationResult(exception);
 
             //Assert
             Assert.IsFalse(opRes.Success);
             // ReSharper disable once PossibleNullReferenceException
             Assert.AreEqual(exception.InnerException.Message, opRes.ErrorMessage);
+            AssertOperationNameMatchCaller(opRes);
         }
 
         [TestMethod]
@@ -86,12 +94,22 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.OpRes
             var exception = new Exception("Error message 1", innerException: new Exception("Error message 2"));
 
             //Act
-            var opRes = new OperationResult(exception);
+            var opRes = new NamedOperationResult(exception);
 
             //Assert
             Assert.IsFalse(opRes.Success);
             // ReSharper disable once PossibleNullReferenceException
             Assert.AreEqual(exception.InnerException.Message, opRes.ErrorMessage);
+            AssertOperationNameMatchCaller(opRes);
+        }
+
+        private static void AssertOperationNameMatchCaller(
+            in NamedOperationResult opRes,
+            [CallerMemberName] string expectedOperationName = null)
+        {
+            Assert.AreEqual(
+               expectedOperationName,
+               opRes.OperationName);
         }
     }
 }

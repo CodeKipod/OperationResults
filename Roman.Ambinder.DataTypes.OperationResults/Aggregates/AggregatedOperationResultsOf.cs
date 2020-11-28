@@ -9,7 +9,6 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates
 
         public OperationResultOf<TValue>[] OperationResults { get; }
 
-
         public AggregatedOperationResultsOf(OperationResultOf<TValue>[] operationResults,
              IAggregatedOperationResultsEvaluator operationResultsAggregateEvaluator)
         {
@@ -19,7 +18,6 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates
             ErrorMessage = aggregateOpRes.ErrorMessage;
             OperationResults = operationResults;
         }
-
 
         public static implicit operator bool(in AggregatedOperationResultsOf<TValue> opResults)
             => opResults.Success;

@@ -8,11 +8,12 @@ namespace Roman.Ambinder.DataTypes.OperationResults
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ResolveErrorMessage(this Exception exception)
         {
-            while (exception.InnerException != null) 
+            while (exception.InnerException != null)
                 exception = exception.InnerException;
 
             return exception?.Message;
         }
-            //=> (exception.InnerException ?? exception).Message;
+
+        //=> (exception.InnerException ?? exception).Message;
     }
 }

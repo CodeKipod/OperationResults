@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation
+﻿namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation
 {
     public interface IAggregatedOperationResultsEvaluator
     {

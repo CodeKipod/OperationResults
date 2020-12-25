@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Roman.Ambinder.DataTypes.OperationResults\Roman.Ambinder.DataTypes.OperationResults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Collections\" />
+  </ItemGroup>
+
 </Project>

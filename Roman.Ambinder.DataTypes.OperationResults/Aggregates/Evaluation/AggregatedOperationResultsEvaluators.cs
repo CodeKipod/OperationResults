@@ -1,6 +1,8 @@
-﻿namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation
+﻿using Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation.Common;
+
+namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation
 {
-    public static class AggreagetedOperationResultsEvaluators
+    public static class AggregatedOperationResultsEvaluators
     {
         public static IAggregatedOperationResultsEvaluator All { get; } =
             AggregatedOperationResultsAllSuccess.Instance;

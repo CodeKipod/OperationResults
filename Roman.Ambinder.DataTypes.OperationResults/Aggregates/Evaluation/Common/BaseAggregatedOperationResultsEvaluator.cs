@@ -1,4 +1,6 @@
-﻿namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation
+﻿using Roman.Ambinder.DataTypes.OperationResults.Extensions;
+
+namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation.Common
 {
     public abstract class BaseAggregatedOperationResultsEvaluator
     {

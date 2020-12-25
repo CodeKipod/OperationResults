@@ -1,4 +1,4 @@
-﻿namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation
+﻿namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation.Common
 {
     public interface IAggregatedOperationResultsEvaluator
     {

@@ -1,4 +1,4 @@
-﻿namespace Roman.Ambinder.DataTypes.OperationResults
+﻿namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation.Common
 {
     public enum AggregationPolicyEnum : byte
     {

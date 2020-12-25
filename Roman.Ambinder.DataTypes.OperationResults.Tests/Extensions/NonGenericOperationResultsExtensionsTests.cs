@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Text;
+using Roman.Ambinder.DataTypes.OperationResults.Extensions;
 
 namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
 {

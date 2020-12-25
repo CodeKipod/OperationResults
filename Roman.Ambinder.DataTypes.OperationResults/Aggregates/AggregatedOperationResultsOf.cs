@@ -1,4 +1,4 @@
-﻿using Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation;
+﻿using Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation.Common;
 
 namespace Roman.Ambinder.DataTypes.OperationResults.Aggregates
 {

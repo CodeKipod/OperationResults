@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation;
 using System.Text;
+using Roman.Ambinder.DataTypes.OperationResults.Aggregates.Evaluation.Common;
 
 namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
 {
@@ -8,7 +9,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
     public class AggregatedOperationResultsAnySuccessTests
     {
         [TestMethod]
-        public void AllSucessfulOpRes_Evaluate_SuccessfulOpRes()
+        public void AllSuccessfulOpRes_Evaluate_SuccessfulOpRes()
         {
             //Arrange
             var evaluatorUnderTest = GetEvaluator();
@@ -17,11 +18,11 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
             const bool expectedSuccessValue = true;
 
             //Act
-            var actualOpResAggreagte = evaluatorUnderTest.Evaluate(operationResults);
+            var actualOpResAggregated = evaluatorUnderTest.Evaluate(operationResults);
 
             //Assert
-            Assert.AreEqual(expectedSuccessValue, actualOpResAggreagte.Success);
-            Assert.AreEqual(expectedErrorMessage, actualOpResAggreagte.ErrorMessage);
+            Assert.AreEqual(expectedSuccessValue, actualOpResAggregated.Success);
+            Assert.AreEqual(expectedErrorMessage, actualOpResAggregated.ErrorMessage);
         }
 
         [TestMethod]
@@ -34,11 +35,11 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
             const bool expectedSuccessValue = false;
 
             //Act
-            var actualOpResAggreagte = evaluatorUnderTest.Evaluate(operationResults);
+            var actualOpResAggregated = evaluatorUnderTest.Evaluate(operationResults);
 
             //Assert
-            Assert.AreEqual(expectedSuccessValue, actualOpResAggreagte.Success);
-            Assert.AreEqual(expectedErrorMessage, actualOpResAggreagte.ErrorMessage);
+            Assert.AreEqual(expectedSuccessValue, actualOpResAggregated.Success);
+            Assert.AreEqual(expectedErrorMessage, actualOpResAggregated.ErrorMessage);
         }
 
         [TestMethod]
@@ -52,11 +53,11 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
             const bool expectedSuccessValue = false;
 
             //Act
-            var actualOpResAggreagte = evaluatorUnderTest.Evaluate(operationResults);
+            var actualOpResAggregated = evaluatorUnderTest.Evaluate(operationResults);
 
             //Assert
-            Assert.AreEqual(expectedSuccessValue, actualOpResAggreagte.Success);
-            Assert.AreEqual(expectedErrorMessage, actualOpResAggreagte.ErrorMessage);
+            Assert.AreEqual(expectedSuccessValue, actualOpResAggregated.Success);
+            Assert.AreEqual(expectedErrorMessage, actualOpResAggregated.ErrorMessage);
         }
 
         [TestMethod]
@@ -70,11 +71,11 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
             const bool expectedSuccessValue = true;
 
             //Act
-            var actualOpResAggreagte = evaluatorUnderTest.Evaluate(operationResults);
+            var actualOpResAggregated = evaluatorUnderTest.Evaluate(operationResults);
 
             //Assert
-            Assert.AreEqual(expectedSuccessValue, actualOpResAggreagte.Success);
-            Assert.AreEqual(expectedErrorMessage, actualOpResAggreagte.ErrorMessage);
+            Assert.AreEqual(expectedSuccessValue, actualOpResAggregated.Success);
+            Assert.AreEqual(expectedErrorMessage, actualOpResAggregated.ErrorMessage);
         }
 
         private static string GetExpectedErrorMessages(OperationResult[] operationResults)
@@ -86,8 +87,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Aggregates
                 {
                     if (!string.IsNullOrEmpty(opRes.ErrorMessage))
                     {
-                        if (expectedErrorMessagesBuilder == null)
-                            expectedErrorMessagesBuilder = new StringBuilder();
+                        expectedErrorMessagesBuilder ??= new StringBuilder();
 
                         expectedErrorMessagesBuilder.AppendLine(opRes.ErrorMessage);
                     }

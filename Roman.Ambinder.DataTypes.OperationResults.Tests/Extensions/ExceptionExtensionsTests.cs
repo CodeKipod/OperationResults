@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using Roman.Ambinder.DataTypes.OperationResults.Extensions;
 
 namespace Roman.Ambinder.DataTypes.OperationResults.Tests.Extensions
 {

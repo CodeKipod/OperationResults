@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Roman.Ambinder.DataTypes.OperationResults
+namespace Roman.Ambinder.DataTypes.OperationResults.Extensions
 {
     public static class OperationResultsFormattingExtensions
     {

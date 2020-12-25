@@ -115,6 +115,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.NamedOpResOf
             //Assert
             AssertValuesMatchExpected(opRes,
                 expectedSuccessIndication: false,
+                // ReSharper disable once PossibleNullReferenceException
                 expectedErrorMessage: exception.InnerException.Message,
                 expectedValue: default);
         }
@@ -132,6 +133,7 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.NamedOpResOf
             //Assert
             AssertValuesMatchExpected(opRes,
               expectedSuccessIndication: false,
+              // ReSharper disable once PossibleNullReferenceException
               expectedErrorMessage: exception.InnerException.Message,
               expectedValue: default);
         }
@@ -158,12 +160,12 @@ namespace Roman.Ambinder.DataTypes.OperationResults.Tests.NamedOpResOf
             bool expectedSuccessIndication,
             string expectedErrorMessage,
             TValue expectedValue,
-            [CallerMemberName] string expecteOpName = null)
+            [CallerMemberName] string expectedOpName = null)
         {
             Assert.AreEqual(expectedValue, opRes.Value, $"Expected {nameof(opRes.Value)} '{opRes.Value}' to match '{expectedValue}'");
             Assert.AreEqual(expectedSuccessIndication, opRes.Success, $"Expected {nameof(opRes.Success)} '{opRes.Success}' to match '{expectedSuccessIndication}'");
             Assert.AreEqual(expectedErrorMessage, opRes.ErrorMessage, $"Expected {nameof(opRes.ErrorMessage)} '{opRes.ErrorMessage}' to match '{expectedErrorMessage}'");
-            Assert.AreEqual(expecteOpName, opRes.OperationName);
+            Assert.AreEqual(expectedOpName, opRes.OperationName);
         }
     }
 }
